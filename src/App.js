@@ -1,25 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { useStateValue } from './Components/REQs/StateProvider'
+import { auth } from "./Components/REQs/Firebase"; 
+import "./App.css";
+import Header from "./Components/JS/Header";
+import Home from "./Components/JS/Home";
+import Footer from "./Components/JS/Footer";
+import Checkout from "./Components/JS/Checkout"
+import Login from "./Components/JS/Login"
+import Register from "./Components/JS/Register"
+
 
 function App() {
+  const [{ user }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+
+      if (authUser) {
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
+      } else {
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+      }
+    });
+    // eslint-disable-next-line
+  }, [user]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <Switch>
+          <Route path="/checkout">
+            <Header />
+            <Checkout />
+            <Footer />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/">
+            <Header />
+            <Home />
+            <Footer />
+          </Route>
+        </Switch>
+    </Router>
   );
 }
 

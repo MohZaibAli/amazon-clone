@@ -1,0 +1,52 @@
+.basketItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px;
+    padding: 20px;
+    max-height: 400px;
+    min-width: 100px;
+    background-color: white;
+}
+
+.basketItem__image {
+    display: flex;
+    flex: 0.30;
+    object-fit: contain;
+    width: 180px;
+    height: 180px;
+}
+
+.basketItem__info {
+    display: flex;
+    flex: 0.45;
+    padding-left: 35px;
+    flex-direction: column;
+    font-size: 17px;
+    font-weight: 800;
+    text-align : left;
+    align-items: left;
+    justify-content: space-around;
+    height: 100px;
+    margin-bottom: 15px; 
+}
+
+.basketItem__price {
+    margin-top: 5px;
+    text-align : left;
+}
+
+.basketItem__rating {
+    display: flex;
+    text-align : left;
+}
+
+.basketItem__removeFromBasket {
+    background-color: #f0c14b;
+    border: 1px solid;
+    padding: 10px 10px !important;
+    outline: none;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111111;
+}
